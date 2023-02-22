@@ -135,9 +135,9 @@ public class Robot extends TimedRobot {
      * if it is going the wrong way. Repeat for the other 3 motors.
      */
     driveLeftSparkA.setInverted(false);
-    driveRightSparkA.setInverted(false);
+    driveRightSparkA.setInverted(true);
     driveLeftSparkB.setInverted(false);
-    driveRightSparkB.setInverted(false);
+    driveRightSparkB.setInverted(true);
 
     /*
      * Set the arm and intake to brake mode to help hold position.
@@ -332,6 +332,10 @@ public class Robot extends TimedRobot {
      * Negative signs here because the values from the analog sticks are backwards
      * from what we want. Forward returns a negative when we want it positive.
      */
-    setDriveMotors(-j.getRawAxis(1), -j.getRawAxis(2));
+    double drive;
+    if(j.getRawAxis(1)  > -0.05 && j.getRawAxis(1) < 0.05) {drive=0;}
+    else
+    {drive = -j.getRawAxis(1);}
+      setDriveMotors(-j.getRawAxis(1), -j.getRawAxis(2));
   }
 }
